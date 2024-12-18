@@ -17,4 +17,3 @@ class LocalRepositorySpl (private val suplierDao: SuplierDao){
         }
     }
 
-}
