@@ -105,3 +105,42 @@ fun HeaderText() {
     }
 }
 
+@Composable
+fun CardItem(
+    title: String,
+    backgroundColor: Color,
+    iconRes: Int,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(120.dp)
+            .background(
+                color = backgroundColor,
+                shape = RoundedCornerShape(16.dp)
+            )
+            .clickable { onClick() },
+        contentAlignment = Alignment.Center
+    ) {
+        // Gambar memenuhi seluruh kartu
+        Image(
+            painter = painterResource(id = iconRes),
+            contentDescription = null,
+            contentScale = ContentScale.Crop, // Gambar akan memenuhi kartu dan menyesuaikan proporsi
+            modifier = Modifier
+                .fillMaxSize() // Gambar memenuhi seluruh ukuran kartu
+                .background(Color.Transparent),
+            alpha = 0.5f // Transparansi 50%
+        )
+
+        // Teks di atas gambar
+        Text(
+            text = title,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier.align(Alignment.Center) // Teks di tengah kartu
+        )
+    }
+}
