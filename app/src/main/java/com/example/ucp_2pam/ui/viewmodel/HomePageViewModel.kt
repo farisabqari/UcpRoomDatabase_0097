@@ -68,3 +68,16 @@ class HomePageViewModel(
         )
 }
 
+data class HomeBrgUiState(
+    val barangList: List<Barang> = listOf(),
+    val isLoading: Boolean = false,
+    val isError : Boolean = false,
+    val errorMessage: String = ""
+)
+
+data class HomeSplUiState(
+    val listSuplier: List<Suplier> = listOf(),
+    val isLoading: Boolean = false,
+    val isError : Boolean = false,
+    val errorMessage: String = ""
+)
