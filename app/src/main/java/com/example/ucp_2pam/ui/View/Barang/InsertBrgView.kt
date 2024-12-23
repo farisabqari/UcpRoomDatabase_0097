@@ -126,3 +126,109 @@ fun InsertBodyBrg(
         }
     }
 }
+
+@Composable
+fun BarangForm(
+    barangEvent: BarangEvent = BarangEvent(),
+    onValueChange: (BarangEvent) -> Unit = { },
+    errorState: FormBrgErrorState = FormBrgErrorState(),
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+    ) {
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = barangEvent.idbarang,
+            onValueChange = {
+                onValueChange(barangEvent.copy(idbarang = it))
+            },
+            label = { Text(text = "Id Barang") },
+            isError = errorState.idbarang != null,
+            placeholder = { Text(text = "Masukkan Id Barang") }
+        )
+        Text(
+            text = errorState.idbarang ?: "",
+            color = Color.Red
+        )
+        Spacer(modifier = Modifier.padding(8.dp))
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = barangEvent.namabarang,
+            onValueChange = {
+                onValueChange(barangEvent.copy(namabarang = it))
+            },
+            label = { Text(text = "Nama Barang") },
+            isError = errorState.namabarang != null,
+            placeholder = { Text(text = "Masukkan Nama Barang") }
+        )
+        Text(
+            text = errorState.namabarang ?: "",
+            color = Color.Red
+        )
+        Spacer(modifier = Modifier.padding(8.dp))
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = barangEvent.deskripsi,
+            onValueChange = {
+                onValueChange(barangEvent.copy(deskripsi = it))
+            },
+            label = { Text(text = "Deskripsi") },
+            isError = errorState.deskripsi != null,
+            placeholder = { Text(text = "Masukkan Deskripsi") }
+        )
+        Text(
+            text = errorState.deskripsi ?: "",
+            color = Color.Red
+        )
+        Spacer(modifier = Modifier.padding(8.dp))
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = barangEvent.harga.toString(),
+            onValueChange = {
+                onValueChange(barangEvent.copy(harga = it.toInt()))
+            },
+            label = { Text(text = "Harga") },
+            isError = errorState.harga != null,
+            placeholder = { Text(text = "Masukkan Harga") }
+        )
+        Text(
+            text = errorState.harga ?: "",
+            color = Color.Red
+        )
+        Spacer(modifier = Modifier.padding(8.dp))
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = barangEvent.stok.toString(),
+            onValueChange = {
+                onValueChange(barangEvent.copy(stok = it.toInt()))
+            },
+            label = { Text(text = "Stok") },
+            isError = errorState.stok != null,
+            placeholder = { Text(text = "Masukkan Stok") }
+        )
+        Text(
+            text = errorState.stok ?: "",
+            color = Color.Red
+        )
+        Spacer(modifier = Modifier.padding(8.dp))
+        DropdownSuplier(
+            selectedValue = barangEvent.namasuplier,
+            options = NamaSuplier.options(),
+            label = "Nama Suplier",
+            onValueChangedEvent = { selectedSupplier ->
+                onValueChange(barangEvent.copy(namasuplier = selectedSupplier))
+            }
+        )
+        if (errorState.namasuplier != null) {
+            Text(
+                text = errorState.namasuplier,
+                color = Color.Red,
+                fontSize = 12.sp,
+                modifier = Modifier.padding(start = 8.dp, top = 2.dp)
+            )
+        }
+    }
+}
