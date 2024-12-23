@@ -83,3 +83,46 @@ fun InsertBrgView(
         }
     }
 }
+
+@Composable
+fun InsertBodyBrg(
+    modifier: Modifier = Modifier,
+    onValueChange: (BarangEvent) -> Unit,
+    uiState: BrgUiState,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
+            BarangForm(
+                barangEvent = uiState.barangEvent,
+                onValueChange = onValueChange,
+                errorState = uiState.isEntryValid,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+        Button(
+            onClick = onClick,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .padding(bottom = 16.dp),
+            shape = MaterialTheme.shapes.medium,
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+        ) {
+            Text(
+                text = "Simpan",
+                color = Color.White,
+                fontSize = 18.sp
+            )
+        }
+    }
+}
