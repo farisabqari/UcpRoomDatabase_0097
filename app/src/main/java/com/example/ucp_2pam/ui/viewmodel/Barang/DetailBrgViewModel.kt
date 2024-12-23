@@ -59,3 +59,26 @@ class DetailBrgViewModel(
     }
 }
 
+data class DetailBrgUiState(
+    val detailBrgUiEvent: BarangEvent = BarangEvent(),
+    val isLoading: Boolean = false,
+    val isError : Boolean = false,
+    val errorMessage: String = ""
+){
+    val isUiEventEmpty : Boolean
+        get() = detailBrgUiEvent == BarangEvent()
+
+    val isUiEventNotEmpty : Boolean
+        get() = detailBrgUiEvent != BarangEvent()
+}
+
+fun Barang.toDetailUiEvent () : BarangEvent{
+    return BarangEvent(
+        idbarang = idbarang,
+        namabarang = namabarang,
+        deskripsi = deskripsi,
+        harga = harga,
+        stok = stok,
+        namasuplier = namasuplier
+    )
+}
