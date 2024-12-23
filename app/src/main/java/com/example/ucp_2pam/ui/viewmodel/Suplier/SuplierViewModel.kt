@@ -18,3 +18,45 @@ class SuplierViewModel(private val repositorySup: RepositorySpl) : ViewModel() {
         )
     }
 
+    private fun validateFields(): Boolean {
+        val event = SplUiState.suplierEvent
+        val errorState = FormSplErrorState(
+            idsuplier = if (event.idsuplier.isEmpty()) "Id suplier tidak boleh kosong" else null,
+            namasuplier = if (event.namasuplier.isEmpty()) "Nama suplier tidak boleh kosong" else null,
+            kontak = if (event.kontak.isEmpty()) "Kontak suplier tidak boleh kosong" else null,
+            alamat = if (event.alamat.isEmpty()) "Alamat suplier tidak boleh kosong" else null
+        )
+        SplUiState = SplUiState.copy(isEntryValid = errorState)
+        return errorState.isValid()
+    }
+
+    fun saveData() {
+        val currentEvent = SplUiState.suplierEvent
+
+        if (validateFields()) {
+            viewModelScope.launch {
+                try {
+                    repositorySup.insertSuplier(currentEvent.toSuplierEntity())
+                    SplUiState = SplUiState.copy(
+                        snackbarMessage = "Data Berhasil Disimpan",
+                        suplierEvent = SuplierEvent(),
+                        isEntryValid = FormSplErrorState()
+                    )
+                } catch (e: Exception) {
+                    SplUiState = SplUiState.copy(
+                        snackbarMessage = "Data Gagal Disimpan"
+                    )
+                }
+            }
+        } else {
+            SplUiState = SplUiState.copy(
+                snackbarMessage = "Input tidak valid. Periksa kembali data Anda"
+            )
+        }
+    }
+    fun resetSnackbarMessage() {
+        SplUiState = SplUiState.copy(
+            snackbarMessage = null
+        )
+    }
+}
