@@ -47,3 +47,37 @@ fun UpdateBrgView(
         }
     }
 
+    Scaffold (
+        modifier = modifier,
+        snackbarHost = {SnackbarHost(hostState = snackbarHostState)},
+    ) { it
+        Column (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 130.dp)
+        ){
+            TopAppBar(
+                onBack = onBack,
+                showBackButton = true,
+                judul = "Edit Barang",
+            )
+            InsertBodyBrg(
+                uiState = BrgUiState,
+                onValueChange = { updatedEvent ->
+                    viewModel.updateState(updatedEvent)
+                },
+                onClick = {
+                    coroutineScope.launch {
+                        if (viewModel.validateFields()){
+                            viewModel.updateData()
+                            delay(600)
+                            withContext(Dispatchers.Main) {
+                                onNavigate()
+                            }
+                        }
+                    }
+                }
+            )
+        }
+    }
+}
