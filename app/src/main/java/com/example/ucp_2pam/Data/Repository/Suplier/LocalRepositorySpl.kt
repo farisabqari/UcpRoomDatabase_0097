@@ -4,6 +4,7 @@ import com.example.ucp_2pam.Entity.Suplier
 import com.example.ucp_2pam.data.dao.SuplierDao
 import kotlinx.coroutines.flow.Flow
 
+
 class LocalRepositorySpl(
     private val suplierDao: SuplierDao
 ) : RepositorySpl {
