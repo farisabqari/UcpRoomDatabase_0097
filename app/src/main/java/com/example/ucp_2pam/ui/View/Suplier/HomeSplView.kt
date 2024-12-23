@@ -133,3 +133,24 @@ fun BodyHomeSplView(
         }
     }
 }
+
+@Composable
+fun ListSuplier(
+    listSpl: List<Suplier>,
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit = { }
+) {
+    LazyColumn(
+        modifier = modifier
+    ) {
+        items(
+            items = listSpl,
+            itemContent = { spl ->
+                cardSpl(
+                    spl = spl,
+                    onClick = { onClick(spl.idsuplier) }
+                )
+            }
+        )
+    }
+}
