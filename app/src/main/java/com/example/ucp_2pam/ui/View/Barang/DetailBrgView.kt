@@ -168,3 +168,29 @@ fun ItemDetailBrg(
     }
 }
 
+@Composable
+fun ComponentDetailBarang(
+    modifier: Modifier = Modifier,
+    judul: String,
+    isi: String
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.Start
+    ) {
+        Text(
+            text = "$judul:",
+            style = MaterialTheme.typography.titleMedium.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.primary
+            )
+        )
+        Text(
+            text = isi,
+            style = MaterialTheme.typography.bodyMedium.copy(fontSize = 16.sp),
+            color = MaterialTheme.colorScheme.onBackground
+        )
+    }
+}
+
