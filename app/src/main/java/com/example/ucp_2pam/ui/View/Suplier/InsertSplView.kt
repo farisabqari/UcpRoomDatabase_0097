@@ -104,3 +104,64 @@ fun InsertBodySpl(
         }
     }
 }
+
+@Composable
+fun FormSuplier(
+    suplierEvent: SuplierEvent,
+    onValueChange: (SuplierEvent) -> Unit = {},
+    errorState: FormSplErrorState = FormSplErrorState(),
+    modifier: Modifier
+) {
+    Column(
+        modifier = modifier.fillMaxWidth().padding(top = 20.dp).padding(15.dp)
+    ) {
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = suplierEvent.idsuplier,
+            onValueChange = { onValueChange(suplierEvent.copy(idsuplier = it)) },
+            label = { Text(text = "Id Suplier") },
+            isError = errorState.idsuplier != null,
+            placeholder = { Text(text = "Masukkan Id Suplier") }
+        )
+        Text(
+            text = errorState.idsuplier ?: "",
+            color = Color.Red
+        )
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = suplierEvent.namasuplier,
+            onValueChange = { onValueChange(suplierEvent.copy(namasuplier = it)) },
+            label = { Text(text = "Nama Suplier") },
+            isError = errorState.namasuplier != null,
+            placeholder = { Text(text = "Masukkan Nama Suplier") }
+        )
+        Text(
+            text = errorState.namasuplier ?: "",
+            color = Color.Red
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = suplierEvent.kontak,
+            onValueChange = { onValueChange(suplierEvent.copy(kontak = it)) },
+            label = { Text(text = "Kontak") },
+            isError = errorState.kontak != null,
+        )
+        Text(
+            text = errorState.kontak ?: "",
+            color = Color.Red
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = suplierEvent.alamat,
+            onValueChange = { onValueChange(suplierEvent.copy(alamat = it)) },
+            label = { Text(text = "Alamat") },
+            isError = errorState.alamat != null,
+        )
+        Text(
+            text = errorState.alamat ?: "",
+            color = Color.Red
+        )
+    }
+}
