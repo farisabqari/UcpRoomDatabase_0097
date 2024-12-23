@@ -132,3 +132,25 @@ fun BodyHomeBrgView (
         }
     }
 }
+
+@Composable
+fun ListBarang (
+    listBrg : List<Barang>,
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit
+) {
+    LazyColumn (
+        modifier = modifier
+    ) {
+        items(
+            items = listBrg,
+            itemContent = { brg ->
+                CardBarang(
+                    brg = brg,
+                    onClick = { onClick(brg.idbarang)}
+                )
+            }
+        )
+    }
+}
+
