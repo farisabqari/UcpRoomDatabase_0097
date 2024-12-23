@@ -31,3 +31,34 @@ class BarangViewModel (private val repositoryBrg: RepositoryBrg) : ViewModel() {
         BrgUiState = BrgUiState.copy(isEntryValid = errorState)
         return errorState.isValid()
     }
+    fun saveData(){
+        val currentEvent = BrgUiState.barangEvent
+
+        if (validateFields()){
+            viewModelScope.launch {
+                try {
+                    repositoryBrg.insertBarang(currentEvent.toBarangEntity())
+                    BrgUiState = BrgUiState.copy(
+                        snackbarMessage = "Data Berhasil Disimpan",
+                        barangEvent = BarangEvent(),
+                        isEntryValid = FormBrgErrorState()
+                    )
+                }catch (e: Exception){
+                    BrgUiState = BrgUiState.copy(
+                        snackbarMessage = "Data Gagal Disimpan"
+                    )
+                }
+            }
+        }else{
+            BrgUiState = BrgUiState.copy(
+                snackbarMessage = "Input tidak valid. Periksa kembali data Anda"
+            )
+        }
+    }
+    fun resetSnackbarMessage(){
+        BrgUiState = BrgUiState.copy(
+            snackbarMessage = null
+        )
+    }
+}
+
