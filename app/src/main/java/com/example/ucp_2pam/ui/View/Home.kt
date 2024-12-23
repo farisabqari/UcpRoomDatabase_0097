@@ -83,4 +83,25 @@ fun Home(
     )
 }
 
+@Composable
+fun HeaderText() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text(
+            text = "Aplikasi Pengolahan Barang",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
+        )
+        Text(
+            text = "Kelola data barang dan suplier dengan mudah.",
+            fontSize = 16.sp,
+            color = Color.Gray
+        )
+    }
+}
 
