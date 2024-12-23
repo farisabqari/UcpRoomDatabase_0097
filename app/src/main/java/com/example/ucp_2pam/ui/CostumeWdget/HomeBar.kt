@@ -44,4 +44,62 @@ fun HomeBar(
                 shape = RoundedCornerShape(bottomEnd = 60.dp)
             )
             .padding(horizontal = 22.dp, vertical = 26.dp)
-    )
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            if (showImage && imageResource != null) {
+                Image(
+                    painter = painterResource(id = imageResource),
+                    contentDescription = "Logo",
+                    modifier = Modifier
+                        .size(80.dp)
+                        .background(Color.White.copy(alpha = 0.15f))
+                )
+            }
+
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 16.dp)
+                    .fillMaxWidth(), // Mengisi seluruh lebar
+                horizontalAlignment = Alignment.End // Rata kanan
+            ) {
+                Text(
+                    text = "A L I A S",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 26.sp,
+                    textAlign = TextAlign.End // Teks rata kanan
+                )
+                Text(
+                    text = "alias sambung menyambung menjadi satu",
+                    color = Color.White.copy(alpha = 0.7f),
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.End // Teks rata kanan
+                )
+            }
+        }
+
+        // Tombol kembali (opsional)
+        if (showBackButton) {
+            IconButton(
+                onClick = onBack,
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(CircleShape)
+                    .background(Color.White.copy(alpha = 0.15f))
+                    .padding(4.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.White
+                )
+            }
+        }
+    }
+}
